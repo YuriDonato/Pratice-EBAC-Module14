@@ -13,7 +13,7 @@ import androidx.navigation.ui.onNavDestinationSelected
 import com.example.modulo14tarefa.databinding.FragmentPlayerBinding
 import com.google.android.material.snackbar.Snackbar
 
-class PlayerFragment : Fragment(), AdapterView.OnItemSelectedListener {
+class PlayerFragment : Fragment(){
     lateinit var root: View
     lateinit var selectPlay: Spinner
     lateinit var listener: JogadorListener
@@ -78,13 +78,4 @@ class PlayerFragment : Fragment(), AdapterView.OnItemSelectedListener {
         //Armazenar aqui as informacoes
     }
 
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        val plays = resources.getStringArray(R.array.avaiable_plays)
-        val selectedPlay = plays[position]
-
-        Toast.makeText(requireContext(),"Jogada selecionada: $selectedPlay",Toast.LENGTH_SHORT).show() // um teste pra ver se ta armazenando certo
-    }
-
-    override fun onNothingSelected(parent: AdapterView<*>?) {
-    }
 }

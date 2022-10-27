@@ -22,7 +22,7 @@ class JokenpoEngine(private val avaiablePlays: Array<String>) {
         }
     }
 
-    private fun getAIPlay() : String{
+    public fun getAIPlay() : String{
         val playIndex = Random.nextInt(0,2)
         return avaiablePlays[playIndex]
     }

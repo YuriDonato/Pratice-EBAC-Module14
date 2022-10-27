@@ -1,6 +1,7 @@
 package com.example.modulo14tarefa
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,8 +10,11 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -24,19 +28,18 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 
-class MainActivity : AppCompatActivity(),PlayerFragment.JogadorListener {
+class MainActivity : AppCompatActivity(),PlayerFragment.JogadorListener, AdapterView.OnItemSelectedListener {
     lateinit var drawer: DrawerLayout
     lateinit var navDrawer: NavigationView
     lateinit var bottomNav: BottomNavigationView
     lateinit var navController: NavController
     lateinit var appBarConfiguration: AppBarConfiguration
-    lateinit var currentPlay: String
+    var currentPlay: String = "Pedra"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
-        currentPlay = "Pedra"
 
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar2)
@@ -89,6 +92,8 @@ class MainActivity : AppCompatActivity(),PlayerFragment.JogadorListener {
             }
             true
         }
+
+        onPlaySelected(currentPlay)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -102,6 +107,17 @@ class MainActivity : AppCompatActivity(),PlayerFragment.JogadorListener {
 
     override fun onPlaySelected(selectedPlay: String) {
         currentPlay = selectedPlay
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        val plays = resources.getStringArray(R.array.avaiable_plays)
+        val selectedPlay = plays[position]
+
+        Toast.makeText(this,"Jogada selecionada: $selectedPlay", Toast.LENGTH_SHORT).show() // um teste pra ver se ta armazenando certo
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+
     }
 
 }

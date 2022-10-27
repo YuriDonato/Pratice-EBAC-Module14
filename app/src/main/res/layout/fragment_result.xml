@@ -36,6 +36,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tela_result_resulttext" />
 
+        <TextView
+            android:id="@+id/textViewJogadasResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jogada do Player vs Do AI"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tela_result_resulttext" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
