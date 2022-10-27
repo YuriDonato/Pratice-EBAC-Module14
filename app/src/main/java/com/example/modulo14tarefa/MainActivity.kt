@@ -67,6 +67,28 @@ class MainActivity : AppCompatActivity(),PlayerFragment.JogadorListener {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navDrawer.setupWithNavController(navController)
         bottomNav.setupWithNavController(navController)
+        bottomNav.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.resultFragment -> {
+                    val args = Bundle()
+                    args.putString("currentPlay",currentPlay)
+                    navController.navigate(it.itemId, args)
+                }
+                else -> navController.navigate(it.itemId)
+            }
+            true
+        }
+        navDrawer.setNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.resultFragment -> {
+                    val args = Bundle()
+                    args.putString("currentPlay",currentPlay)
+                    navController.navigate(it.itemId, args)
+                }
+                else -> navController.navigate(it.itemId)
+            }
+            true
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

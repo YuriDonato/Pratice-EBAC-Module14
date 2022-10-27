@@ -20,7 +20,7 @@ class PlayerFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        listener =
+        listener = MainActivity()
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,8 +34,10 @@ class PlayerFragment : Fragment(), AdapterView.OnItemSelectedListener {
         setHasOptionsMenu(true)
         setupSelectPlaySpinner()
 
+        listener.onPlaySelected(selectPlay.toString())
         return root
     }
+
 
     interface JogadorListener {
         fun onPlaySelected(selectedPlay: String)

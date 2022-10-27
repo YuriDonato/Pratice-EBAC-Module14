@@ -8,7 +8,7 @@ enum class Result{
 
 class JokenpoEngine(private val avaiablePlays: Array<String>) {
 
-    public fun calculateResult(playerPlay: String,): Result {
+    public fun calculateResult(playerPlay: String): Result {
         val aiPlay = getAIPlay()
 
         return when {
