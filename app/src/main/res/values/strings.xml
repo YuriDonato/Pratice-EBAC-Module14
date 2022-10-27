@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Jokenpo</string>
+    <string name="button_title">Iniciar Activity</string>
+    <string name="button_second_activity">Voltar</string>
+    <string name="second_screen_title">Segunda Tela</string>
+    <string name="menu_save_title">Salvar</string>
+    <string name="menu_settings_title">Reiniciar</string>
+    <string name="drawer_home_title">Home</string>
+    <string name="bottom_nav_title_1">Jogador</string>
+    <string name="bottom_nav_title_2">Resultado</string>
+    <string name="bem_vindo">Bem Vindo ao Jokenpo</string>
+    <string name="iniciar">Iniciar</string>
+    <string name="jogador_1">Jogador 1</string>
+    <string name="selecionar_jogada">Selecionar Jogada</string>
+    <string name="result">Resultado</string>
+    <string name="winner_text">O jogador xxx venceu!</string>
+    <string name="jogador">Jogador</string>
+
+    <string-array name="avaiable_plays">
+        <item>Papel</item>
+        <item>Tesoura</item>
+        <item>Pedra</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

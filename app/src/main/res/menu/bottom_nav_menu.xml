@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/playerFragment"
+        android:title="@string/bottom_nav_title_1"
+        android:icon="@drawable/ic_avatar"/>
+    <item
+        android:id="@+id/resultFragment"
+        android:title="@string/bottom_nav_title_2"
+        android:icon="@drawable/ic_option2"/>
+</menu>
