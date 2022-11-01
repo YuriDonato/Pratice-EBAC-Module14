@@ -9,28 +9,29 @@ import androidx.navigation.ui.onNavDestinationSelected
 import com.example.modulo14tarefa.databinding.FragmentPlayerBinding
 import com.example.modulo14tarefa.databinding.FragmentResultBinding
 import com.google.android.material.snackbar.Snackbar
-import kotlin.Result
 
 class ResultFragment : Fragment() {
+    //lateinit var root: View
+    lateinit var engine: JokenpoEngine
     lateinit var bind: FragmentResultBinding
-    lateinit var jokenpoEngine: JokenpoEngine
     lateinit var resultText: TextView
-    lateinit var playsText: TextView
+    lateinit var resultText2: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentPlayerBinding.inflate(inflater,container,false)
+        //root = binding.root
 
         lifecycle.addObserver(CustomObserver())
 
         bind = FragmentResultBinding.inflate(inflater,container, false)
-        jokenpoEngine = JokenpoEngine(resources.getStringArray(R.array.avaiable_plays))
+        engine = JokenpoEngine(resources.getStringArray(R.array.avaiable_plays))
 
         val currentPlay = arguments?.getString("currentPlay")
-        resultText = bind.textView4
-        playsText = bind.textViewJogadasResult
+        resultText = bind.textView4 //texto a ser mudado
+        resultText2 = bind.resultadoGeralTextos
 
         currentPlay?.let{
             updateResultText(currentPlay)
@@ -42,17 +43,17 @@ class ResultFragment : Fragment() {
     }
 
     private fun updateResultText(currentPlay: String){
-        val resultGame = jokenpoEngine.calculateResult(currentPlay)
-        val aiPlay = jokenpoEngine.getAIPlay()
+        val resultGame = engine.calculateResult(currentPlay)
+        val aiPlay = engine.getAIPlay()
 
         resultText.text = when(resultGame){
-            com.example.modulo14tarefa.Result.WIN -> "Voce Ganhou"
-            com.example.modulo14tarefa.Result.LOSS -> "Voce Perdeu"
+            Result.WIN -> "Voce Ganhou"
+            Result.LOSS -> "Voce Perdeu"
             else -> "Voce Empatou"
         }
-        playsText.text = when(resultGame){
-            com.example.modulo14tarefa.Result.WIN -> "Voce jogou $currentPlay e a AI jogou $aiPlay"
-            com.example.modulo14tarefa.Result.LOSS -> "Voce jogou $currentPlay e a AI jogou $aiPlay"
+        resultText2.text = when(resultGame) {
+            Result.WIN -> "Voce jogou $currentPlay e a AI jogou $aiPlay"
+            Result.LOSS -> "Voce jogou $currentPlay e a AI jogou $aiPlay"
             else -> "Ambos jogaram $currentPlay"
         }
     }

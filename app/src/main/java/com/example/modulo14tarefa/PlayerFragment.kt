@@ -3,25 +3,26 @@ package com.example.modulo14tarefa
 import android.content.Context
 import android.os.Bundle
 import android.view.*
-import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
 import com.example.modulo14tarefa.databinding.FragmentPlayerBinding
 import com.google.android.material.snackbar.Snackbar
 
-class PlayerFragment : Fragment(){
-    lateinit var root: View
-    lateinit var selectPlay: Spinner
-    lateinit var listener: JogadorListener
+class PlayerFragment : Fragment() {
+    private lateinit var root: View
+    private lateinit var selectPlay: Spinner
+    //lateinit var listener: JogadorListener
+    private lateinit var onItemSelectedListener: OnItemSelectedListener
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        listener = MainActivity()
+        onItemSelectedListener = context as OnItemSelectedListener
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,12 +35,11 @@ class PlayerFragment : Fragment(){
         setHasOptionsMenu(true)
         setupSelectPlaySpinner()
 
-        listener.onPlaySelected(selectPlay.toString())
+        //listener.onPlaySelected(selectPlay.toString())
         return root
     }
 
-
-    interface JogadorListener {
+    interface JogadorListener{
         fun onPlaySelected(selectedPlay: String)
     }
 
@@ -47,10 +47,11 @@ class PlayerFragment : Fragment(){
         val adapter = ArrayAdapter.createFromResource(
             requireContext(),
             R.array.avaiable_plays,
-            android.R.layout.simple_spinner_item)
+            android.R.layout.simple_spinner_item) //definir conteudo do spinner
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        selectPlay.adapter = adapter
+        selectPlay.adapter = adapter // vincular adapter com spinner
+        selectPlay.onItemSelectedListener = onItemSelectedListener//definir quem ta escutando o evento e implementando o callback
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -75,7 +76,6 @@ class PlayerFragment : Fragment(){
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        //Armazenar aqui as informacoes
     }
 
 }

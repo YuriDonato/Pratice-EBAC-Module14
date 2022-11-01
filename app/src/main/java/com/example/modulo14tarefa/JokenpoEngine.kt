@@ -1,5 +1,6 @@
 package com.example.modulo14tarefa
 
+import android.util.Log
 import kotlin.random.Random
 
 enum class Result{
@@ -8,8 +9,9 @@ enum class Result{
 
 class JokenpoEngine(private val avaiablePlays: Array<String>) {
 
-    public fun calculateResult(playerPlay: String): Result {
+    public fun calculateResult(playerPlay: String,): Result{
         val aiPlay = getAIPlay()
+
 
         return when {
             playerPlay == aiPlay -> Result.DRAW

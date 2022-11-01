@@ -1,21 +1,11 @@
 package com.example.modulo14tarefa
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.view.GravityCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -26,9 +16,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.modulo14tarefa.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 
-class MainActivity : AppCompatActivity(),PlayerFragment.JogadorListener, AdapterView.OnItemSelectedListener {
+class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     lateinit var drawer: DrawerLayout
     lateinit var navDrawer: NavigationView
     lateinit var bottomNav: BottomNavigationView
@@ -52,8 +41,6 @@ class MainActivity : AppCompatActivity(),PlayerFragment.JogadorListener, Adapter
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
 
-        appBarConfiguration =
-            AppBarConfiguration(setOf(R.id.playerFragment,R.id.resultFragment), drawer)
 
         navController.addOnDestinationChangedListener{_,destination,_ ->
             when(destination.id){
@@ -67,8 +54,9 @@ class MainActivity : AppCompatActivity(),PlayerFragment.JogadorListener, Adapter
             }
         }
 
+        appBarConfiguration =
+            AppBarConfiguration(setOf(R.id.playerFragment,R.id.resultFragment), drawer)
         setupActionBarWithNavController(navController, appBarConfiguration)
-        navDrawer.setupWithNavController(navController)
         bottomNav.setupWithNavController(navController)
         bottomNav.setOnItemSelectedListener {
             when(it.itemId){
@@ -81,6 +69,7 @@ class MainActivity : AppCompatActivity(),PlayerFragment.JogadorListener, Adapter
             }
             true
         }
+        navDrawer.setupWithNavController(navController)
         navDrawer.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.resultFragment -> {
@@ -92,32 +81,26 @@ class MainActivity : AppCompatActivity(),PlayerFragment.JogadorListener, Adapter
             }
             true
         }
-
         onPlaySelected(currentPlay)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        //Armazenar aqui as informacoes
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    override fun onPlaySelected(selectedPlay: String) {
+    fun onPlaySelected(selectedPlay: String){
         currentPlay = selectedPlay
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        val plays = resources.getStringArray(R.array.avaiable_plays)
-        val selectedPlay = plays[position]
+        val avaiablePlays = resources.getStringArray(R.array.avaiable_plays)
+        currentPlay = avaiablePlays[position]
+        Log.d("CADEOERRO", "chegou no mainactivity onitemselected: $currentPlay")
 
-        Toast.makeText(this,"Jogada selecionada: $selectedPlay", Toast.LENGTH_SHORT).show() // um teste pra ver se ta armazenando certo
-    }
-
-    override fun onNothingSelected(parent: AdapterView<*>?) {
+        Toast.makeText(this,"Jogada selecionada: $currentPlay", Toast.LENGTH_SHORT).show() // um teste pra ver se ta armazenando certo
 
     }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {}
 
 }
